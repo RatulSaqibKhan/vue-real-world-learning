@@ -1,5 +1,5 @@
 <template>
-  <h1>Event List</h1>
+  <h1>Event #1</h1>
 </template>
 
 <script>
