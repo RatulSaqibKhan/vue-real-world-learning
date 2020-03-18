@@ -1,13 +1,16 @@
 <template>
-  <h1>Event #1</h1>
+  <h1>Event #{{ id }}</h1>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      key: ''
+  props: {
+    id: {
+      type: Number
     }
+  },
+  data() {
+    return {}
   }
 }
 </script>
