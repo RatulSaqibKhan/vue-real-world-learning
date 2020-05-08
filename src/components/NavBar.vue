@@ -1,6 +1,6 @@
 <template>
   <div class="nav" id="nav">
-    <router-link to="/" class="brand">REAL WORLD EVENTS</router-link>
+    <router-link to="/" class="brand">VUE EVENTS</router-link>
     <nav>
       <router-link :to="{ name: 'EventList' }">List</router-link> |
       <router-link :to="{ name: 'EventCreate' }">Create</router-link>
@@ -23,9 +23,14 @@ export default {}
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1.5em;
-  color: #39b982;
+  color: #003340;
   text-decoration: none;
 }
+
+.brand:hover {
+  text-shadow: 0 0 5px #003340;
+}
+
 .nav .nav-item {
   box-sizing: border-box;
   margin: 0 5px;

@@ -36,7 +36,7 @@ hr {
   overflow: visible;
 }
 a {
-  color: darkred;
+  color: green;
   font-weight: 600;
   background-color: transparent;
   text-decoration: none;

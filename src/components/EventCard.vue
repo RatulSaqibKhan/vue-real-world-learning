@@ -35,8 +35,8 @@ export default {
   padding: 20px;
   margin-bottom: 24px;
   transition: all 0.2s linear;
-  background-color: antiquewhite;
-  color: lightcoral;
+  background-color: transparent;
+  color: rgba(6, 80, 12, 0.986);
   cursor: pointer;
 }
 .event-card:hover {
