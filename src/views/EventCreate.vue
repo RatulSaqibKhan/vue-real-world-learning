@@ -2,27 +2,22 @@
   <div>
     <h1>Create an Event, {{ user.name }}</h1>
     <p>Created by, {{ user.id }}</p>
-    <h4>There are {{ catLength }} categories:</h4>
+    <h4>There are {{ categoryLength }} categories:</h4>
     <ul v-for="(category, index) in categories" :key="index">
       <li>{{ category }}</li>
     </ul>
-    <p>Event {{ getEvent(1) }}</p>
+    <p>Event {{ getEventById(4) }}</p>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'EventCreate',
   computed: {
-    catLength() {
-      return this.$store.getters.categoryLength
-    },
-    getEvent() {
-      return this.$store.getters.getEventById
-    },
-    ...mapState(['user', 'categories'])
+    ...mapState(['user', 'categories']),
+    ...mapGetters(['categoryLength', 'getEventById'])
   },
   data() {
     return {
