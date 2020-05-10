@@ -6,6 +6,7 @@
     <ul v-for="(category, index) in categories" :key="index">
       <li>{{ category }}</li>
     </ul>
+    <p>Event {{ getEvent(1) }}</p>
   </div>
 </template>
 
@@ -17,6 +18,9 @@ export default {
   computed: {
     catLength() {
       return this.$store.getters.categoryLength
+    },
+    getEvent() {
+      return this.$store.getters.getEventById
     },
     ...mapState(['user', 'categories'])
   },
