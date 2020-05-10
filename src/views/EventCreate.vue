@@ -14,7 +14,12 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'EventCreate',
-  computed: mapState(['user', 'categories']),
+  computed: {
+    catLength() {
+      return this.$store.getters.catLength
+    },
+    ...mapState(['user', 'categories'])
+  },
   data() {
     return {
       key: ''
