@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>Event Listing</h1>
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <h1>Event List for {{ userModule.user.name }}</h1>
+    <EventCard
+      v-for="event in eventModule.events"
+      :key="event.id"
+      :event="event"
+    />
     <template v-if="page != 1">
       <router-link
         :to="{ name: 'EventList', query: { page: page - 1 } }"
@@ -9,10 +13,10 @@
         >Prev Page</router-link
       >
     </template>
-    <template v-if="page > 1 && eventsTotal > page * 3">
+    <template v-if="page > 1 && hasNextPage">
       |
     </template>
-    <template v-if="eventsTotal > page * 3">
+    <template v-if="hasNextPage">
       <router-link
         :to="{ name: 'EventList', query: { page: page + 1 } }"
         rel="next"
@@ -27,6 +31,7 @@ import EventCard from '@/components/EventCard'
 import { mapState } from 'vuex'
 
 export default {
+  name: 'EventList',
   components: {
     EventCard
   },
@@ -37,7 +42,10 @@ export default {
     page() {
       return parseInt(this.$route.query.page) || 1
     },
-    ...mapState(['events', 'eventsTotal'])
+    hasNextPage() {
+      return this.eventModule.eventsTotal > this.page * 3
+    },
+    ...mapState(['eventModule', 'userModule'])
   }
 }
 </script>
