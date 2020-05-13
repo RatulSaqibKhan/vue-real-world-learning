@@ -21,24 +21,45 @@ const mutations = {
 }
 
 const actions = {
-  createEvent({ commit }, event) {
-    return EventService.postEvent(event).then(() => {
-      commit('ADD_EVENT', event)
-    })
+  createEvent({ commit, dispatch }, event) {
+    return EventService.postEvent(event)
+      .then(() => {
+        commit('ADD_EVENT', event)
+        const notification = {
+          type: 'success',
+          message: 'The event is created successfully'
+        }
+
+        dispatch('notificationModule/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem creating event: ' + error.message
+        }
+
+        dispatch('notificationModule/add', notification, { root: true })
+        throw error
+      })
   },
 
-  fetchEvents({ commit }, { page, limit }) {
+  fetchEvents({ commit, dispatch }, { page, limit }) {
     EventService.getEvents(page, limit)
       .then(response => {
         commit('SET_EVENTS_TOTAL', response.headers['x-total-count'])
         commit('SET_EVENTS', response.data)
       })
       .catch(error => {
-        console.log(`There was an error: ${error.response}`)
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching events: ' + error.message
+        }
+
+        dispatch('notificationModule/add', notification, { root: true })
       })
   },
 
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     var event = getters.getEventById(id)
 
     if (event) {
@@ -49,7 +70,12 @@ const actions = {
           commit('SET_EVENT', response.data)
         })
         .catch(error => {
-          console.log(`There is some error: ${error.response}`)
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching event: ' + error.message
+          }
+
+          dispatch('notificationModule/add', notification, { root: true })
         })
     }
   }

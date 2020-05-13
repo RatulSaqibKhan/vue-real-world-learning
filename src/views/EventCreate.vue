@@ -92,9 +92,7 @@ export default {
           })
           this.event = this.createFreshEvent
         })
-        .catch(() => {
-          alert('Something went wrong creating the event!!')
-        })
+        .catch(() => {})
     },
 
     createFreshEvent() {
