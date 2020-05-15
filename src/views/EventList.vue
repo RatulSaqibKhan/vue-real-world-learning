@@ -36,7 +36,10 @@ export default {
     EventCard
   },
   created() {
-    this.$store.dispatch('fetchEvents', { page: this.page, limit: 3 })
+    this.$store.dispatch('eventModule/fetchEvents', {
+      page: this.page,
+      limit: 3
+    })
   },
   computed: {
     page() {
