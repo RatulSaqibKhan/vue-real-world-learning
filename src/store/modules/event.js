@@ -50,6 +50,7 @@ const actions = {
       .then(response => {
         commit('SET_EVENTS_TOTAL', response.headers['x-total-count'])
         commit('SET_EVENTS', response.data)
+        return response.data
       })
       .catch(error => {
         const notification = {
@@ -66,10 +67,12 @@ const actions = {
 
     if (event) {
       commit('SET_EVENT', event)
+      return event
     } else {
       return EventService.getEvent(id)
         .then(response => {
           commit('SET_EVENT', response.data)
+          return response.data
         })
         .catch(error => {
           const notification = {
